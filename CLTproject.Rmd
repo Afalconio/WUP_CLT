@@ -14,7 +14,7 @@ kkardashtemp  see code below
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
-require(tidyverse)
+require(idyverse)
 require(lattice)
 ```
 
@@ -58,6 +58,21 @@ p
             color="blue", linetype="dashed", size=1)
 print(paste('mean = ', mean(my1000$k2),' sd = ',sd(my1000$k2)))
 
+clt2 <- sd(my1000$kkardashtemp)/sqrt(numb)
+
+diff2 <- abs(sd(my1000$k2)-clt2)
+
+mean2 <- mean(my1000$kkardashtemp)
+
+meandiff2 <- abs(mean(my1000$k2)-mean2)
+
+cat("Expected mean for n =", numb, ":", mean2, "\n")
+
+cat("Expected SD for n =", numb, ":", clt2, "\n")
+
+cat("SD Difference = ", diff2, "\n")
+
+cat("mean Difference = ", meandiff2, "\n")
 ```
 ## We expect the sample mean to be close to population and the standev to get smaller by the ratio of one to the sample size. In this case 1/sqrt(2)
 
@@ -82,8 +97,173 @@ p + ggtitle("n = 4") +
 
 print(paste('mean = ', mean(my1000$k4),' sd = ',sd(my1000$k4)))
 
+clt4 <- sd(my1000$kkardashtemp)/sqrt(numb)
+
+diff4 <- abs(sd(my1000$k4)-clt4)
+
+mean4 <- mean(my1000$kkardashtemp)
+
+meandiff4 <- abs(mean(my1000$k4)-mean4)
+
+cat("Expected mean for n =", numb, ":", mean4, "\n")
+
+cat("Expected SD for n =", numb, ":", clt4, "\n")
+
+cat("SD Difference = ", diff4, "\n")
+
+cat("mean Difference = ", meandiff4, "\n")
 ```
 
 ### In this case the stdev was cut in half because the sample size was four. This is what the central limit theorem says. There are also 5 peaks. They go from FFFF,to FFFM, to FFMM to FMMM and finally MMMM.
 
-# Now finish by adding blocks with numb being 9, then 16, 25, and 36. be sure to mention how the standard deviation progresses as the sample size changes,
+```{r}
+numb = 9
+Hdata = Homers_data[sample(1:1000,size=numb*1000, replace=T),"kkardashtemp"]
+mdata  <-matrix(Hdata,nrow=1000,ncol=numb)
+x.avg <- apply(mdata,1,mean)
+my1000$k9 = x.avg
+
+
+p <- ggplot(my1000, aes(x=k9),col=sex) + 
+  geom_density() +
+
+# Add mean line
+ geom_vline(aes(xintercept=mean(k9)),
+            color="orange", linetype="dashed", size=1)
+p + ggtitle("n = 9") +
+  xlab("temperature") + ylab(" density")
+
+print(paste('mean = ', mean(my1000$k9),' sd = ',sd(my1000$k9)))
+
+
+clt9 <- sd(my1000$kkardashtemp)/sqrt(numb)
+
+diff9 <- abs(sd(my1000$k9)-clt9)
+
+mean9 <- mean(my1000$kkardashtemp)
+
+meandiff9 <- abs(mean(my1000$k9)-mean9)
+
+cat("Expected mean for n =", numb, ":", mean9, "\n")
+
+cat("Expected SD for n =", numb, ":", clt9, "\n")
+
+cat("SD Difference = ", diff9, "\n")
+
+cat("mean Difference = ", meandiff9, "\n")
+
+```
+The standard deviation for the plot with 9 people surveyed, there was a standard deviation of 13.99. The expected standard deviation was for the standard deviation to become smaller by the ratio of one to the sample size. ie., 1/sqrt(n) where n is the integer used in the plot representing the number of people surveyed. This holds true with this standard deviation as 13.99 as significantly smaller as it is 1/3rd of the original standard deviation of 42. 
+
+
+```{r}
+numb = 16
+Hdata = Homers_data[sample(1:1000,size=numb*1000, replace=T),"kkardashtemp"]
+mdata  <-matrix(Hdata,nrow=1000,ncol=numb)
+x.avg <- apply(mdata,1,mean)
+my1000$k16 = x.avg
+
+
+p <- ggplot(my1000, aes(x=k16),col=sex) + 
+  geom_density() +
+
+# Add mean line
+ geom_vline(aes(xintercept=mean(k16)),
+            color="red", linetype="dashed", size=1)
+p + ggtitle("n = 16") +
+  xlab("temperature") + ylab(" density")
+
+print(paste('mean = ', mean(my1000$k16),' sd = ',sd(my1000$k16)))
+
+clt16 <- sd(my1000$kkardashtemp)/sqrt(numb)
+
+diff16 <- abs(sd(my1000$k16)-clt16)
+
+mean16 <- mean(my1000$kkardashtemp)
+
+meandiff16 <- abs(mean(my1000$k16)-mean16)
+
+cat("Expected mean for n =", numb, ":", mean16, "\n")
+
+cat("Expected SD for n =", numb, ":", clt16, "\n")
+
+cat("SD Difference = ", diff16, "\n")
+
+cat("mean Difference = ", meandiff16, "\n")
+```
+
+
+
+```{r}
+numb = 25
+Hdata = Homers_data[sample(1:1000,size=numb*1000, replace=T),"kkardashtemp"]
+mdata  <-matrix(Hdata,nrow=1000,ncol=numb)
+x.avg <- apply(mdata,1,mean)
+my1000$k25 = x.avg
+
+
+p <- ggplot(my1000, aes(x=k25),col=sex) + 
+  geom_density() +
+
+# Add mean line
+ geom_vline(aes(xintercept=mean(k25)),
+            color="yellow", linetype="dashed", size=1)
+p + ggtitle("n = 25") +
+  xlab("temperature") + ylab(" density")
+
+print(paste('mean = ', mean(my1000$k25),' sd = ',sd(my1000$k25)))
+
+clt25 <- sd(my1000$kkardashtemp)/sqrt(numb)
+
+diff25 <- abs(sd(my1000$k25)-clt25)
+
+mean25 <- mean(my1000$kkardashtemp)
+
+meandiff25 <- abs(mean(my1000$k25)-mean25)
+
+cat("Expected mean for n =", numb, ":", mean25, "\n")
+
+cat("Expected SD for n =", numb, ":", clt25, "\n")
+
+cat("SD Difference = ", diff25, "\n")
+
+cat("mean Difference = ", meandiff25, "\n")
+```
+
+```{r}
+numb = 36
+Hdata = Homers_data[sample(1:1000,size=numb*1000, replace=T),"kkardashtemp"]
+mdata  <-matrix(Hdata,nrow=1000,ncol=numb)
+x.avg <- apply(mdata,1,mean)
+my1000$k36 = x.avg
+
+
+p <- ggplot(my1000, aes(x=k36),col=sex) + 
+  geom_density() +
+
+# Add mean line
+ geom_vline(aes(xintercept=mean(k36)),
+            color="pink", linetype="dashed", size=2)
+p + ggtitle("n = 36") +
+  xlab("temperature") + ylab(" density")
+
+print(paste('mean = ', mean(my1000$k36),' sd = ',sd(my1000$k36)))
+
+clt36 <- sd(my1000$kkardashtemp)/sqrt(numb)
+
+diff36 <- abs(sd(my1000$k36)-clt36)
+
+mean36 <- mean(my1000$kkardashtemp)
+
+meandiff36 <- abs(mean(my1000$k36)-mean36)
+
+cat("Expected mean for n =", numb, ":", mean36, "\n")
+
+cat("Expected SD for n =", numb, ":", clt36, "\n")
+
+cat("SD Difference = ", diff36, "\n")
+
+cat("mean Difference = ", meandiff36, "\n")
+```
+
+Each plot shows a slight deviation in the data every time the code is run or knitted between the expected mean and the actual mean which is represented by the mean difference as well as the difference in the standard deviation between the actual standard deviation and the expected standard deviation. Ultimately, as the density becomes greater with the higher number values such as from n=9 to n=36, the curve of the graph has less deviations which were usually caused by different combinations of Male and Female which resulted in multiple peaks in the other graphs with lower numbers of people included in the data. 
